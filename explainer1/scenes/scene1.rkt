@@ -24,14 +24,14 @@
   (define inc (/ (* 2 pi) n)) 
 
   (parent
-   (children
-    (map
-     (lambda (i)
-      (earth-brain (* inc i))) 
-     (range n)))))
+    (children
+      (map
+        (lambda (i)
+          (earth-brain (* inc i))) 
+        (range n)))))
 
 (define (pop-in-after delay e)
-   (entity 
+  (entity 
     (size-stream (stream-append 
                    (const-stream 0 delay)
                    (grow-pop 10 5))
@@ -46,39 +46,39 @@
   (add-or-replace-components e (relative-rotation r)))
 
 (define (pop-in-brains n delay extra)
- (map 
-   (lambda (i)
-     (pop-in-after (+ extra (* i delay))
-                   (rotate-entity 
-                       (* (/ (* pi 2) n) i)
-                       (brain-circle 1)))) 
-   (range n)))
+  (map 
+    (lambda (i)
+      (pop-in-after (+ extra (* i delay))
+                    (rotate-entity 
+                      (* (/ (* pi 2) n) i)
+                      (brain-circle 1)))) 
+    (range n)))
 
 (define (scene1)
   (enter-north-east
-   #:exit 300
-   (pop-in-brains 8 5 100)
+    #:exit 300
+    (pop-in-brains 8 5 100)
 
-   (parent
-     (relative-size 1.1)
-     (children
-       (pop-in-brains 7 5 125)))
+    (parent
+      (relative-size 1.1)
+      (children
+        (pop-in-brains 7 5 125)))
 
-   (parent
-    (relative-size 1.2)
-    (children
-     (pop-in-brains 5 5 150)))
+    (parent
+      (relative-size 1.2)
+      (children
+        (pop-in-brains 5 5 150)))
 
-   (parent
-    (relative-size 1.3)
-    (children
-     (pop-in-brains 3 5 175)))
+    (parent
+      (relative-size 1.3)
+      (children
+        (pop-in-brains 3 5 175)))
 
-   (earth
-    (relative-size 1)
-    (relative-rotation 0
-     (+ (get-rotation) 0.01))
-    (relative-position (posn 0 0)))))
+    (earth
+      (relative-size 1)
+      (relative-rotation 0
+                         (+ (get-rotation) 0.01))
+      (relative-position (posn 0 0)))))
 
 (module+ test
   (anim

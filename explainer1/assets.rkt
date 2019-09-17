@@ -13,6 +13,11 @@
          tick-between
          off-screen
 
+         callout
+         school-icon
+         government-icon
+         factory-icon
+
          (all-from-out "brain.rkt"))
 
 (require meta-engine 2htdp/image
@@ -35,8 +40,8 @@
 
 (define (earth . cs)
   (add-or-replace-components
-    (entity 
-      (position (posn 200 200))
+    (parent 
+      ;(position (posn 200 200))
       (sprite earth-sprite))
     cs))
 
@@ -63,7 +68,7 @@
   (λ (i w h bs)
     
     (define p (build-path shot-dir (format "~a.png" 
-                                     (~a frame #:width 3 #:pad-string "0" #:align 'right))))
+                                     (~a frame #:width 5 #:pad-string "0" #:align 'right))))
     (define bm (argb-bytes->bitmap w h bs))
     (set! frame (add1 frame))
     (save-bitmap! bm p)))
@@ -161,7 +166,11 @@
 
 ;When this abstraction is working correctly,
 ;  move to extensions/
-(define (pause-until del e)
+(define/contract (pause-until del e)
+ (-> (and/c (negate zero?) positive?) 
+     (or/c entity? (listof entity?))
+     entity?)
+
  (define child-game
   (tick
    (game (parent-data-entity
@@ -194,6 +203,72 @@
   (halt-after after (pause-until del e)))
 
 (define (off-screen)
-  (posn -100000 
-        -100000))
+  (posn -100000 -100000))
+
+(define basic-line
+ (register-sprite 
+  (overlay
+   (line 150 0
+    (pen "black" 5 "solid" "round" "bevel"))
+   (rectangle 160 10 'solid 'transparent))))
+
+(define (callout . cs)
+  (define (top)
+    (parent
+      (relative-position (posn 0 -100))
+      (sprite basic-line)))
+  (define (right)
+    (parent
+      (local-rotation (/ pi 2))
+      (relative-position (posn 100 0))
+      (sprite basic-line)))
+  (define (bottom)
+    (parent
+      (relative-position (posn 0 100))
+      (sprite basic-line)))
+  (define (left)
+    (parent
+      (relative-position (posn -100 0))
+      (local-rotation (/ pi 2))
+      (sprite basic-line)))
+ 
+
+  (add-or-replace-components
+    (parent
+      (children 
+        (top)
+        (right)
+        (bottom)
+        (left)))
+    cs))
+
+
+(define school-sprite
+  (register-sprite (scale 0.1 (bitmap "./images/school.png"))))
+
+(define (school-icon . cs)
+  (add-or-replace-components
+    (parent
+      (sprite school-sprite))
+    cs))
+
+
+(define government-sprite
+  (register-sprite (scale 0.1 (bitmap "./images/government.png"))))
+
+(define (government-icon . cs)
+  (add-or-replace-components
+    (parent
+      (sprite government-sprite))
+    cs))
+
+
+(define factory-sprite
+  (register-sprite (scale 0.1 (bitmap "./images/factory.png"))))
+
+(define (factory-icon . cs)
+  (add-or-replace-components
+    (parent
+      (sprite factory-sprite))
+    cs))
 

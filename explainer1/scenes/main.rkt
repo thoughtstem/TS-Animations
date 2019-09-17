@@ -6,8 +6,8 @@
          "./scene2.rkt")
 
 (anim 
-  (tick-between 0 500 (scene1))
-  (tick-between 400 800 (scene2))
+  (scene1)
+  (pause-until 400 (scene2))
   (bg))
 
 

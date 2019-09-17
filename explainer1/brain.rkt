@@ -19,6 +19,7 @@
          computer-body-sprite-green
          computer-body-sprite-red
          computer-body-sprite-blue
+         computer-body-sprite-purple
 
          computer-entity)
 
@@ -57,6 +58,10 @@
 (define computer-body-sprite-blue
  (computer-body-sprite
   (make-object color% 0 0 255 0.5)))
+
+(define computer-body-sprite-purple
+ (computer-body-sprite
+  (make-object color% 138 43 226 0.5)))
 
 (define (brain-eye-sprite (angle 90)) 
   (register-sprite
@@ -272,7 +277,8 @@
   (list 
     computer-body-sprite-red
     computer-body-sprite-green
-    computer-body-sprite-blue))
+    computer-body-sprite-blue
+    computer-body-sprite-purple))
 
 (define (random-computer-body-sprite)
   (list-ref computer-body-sprites 

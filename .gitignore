@@ -9,4 +9,4 @@ doc/*
 *.swo
 *.gif
 *.mp4
-gifs/*.png
+*gifs/*.png
