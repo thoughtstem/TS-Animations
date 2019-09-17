@@ -1,0 +1,12 @@
+compiled/*
+**/compiled/*
+*/compiled/*
+*~
+.DS_Store
+*.bak
+doc/*
+*.swp
+*.swo
+*.gif
+*.mp4
+gifs/*.png
