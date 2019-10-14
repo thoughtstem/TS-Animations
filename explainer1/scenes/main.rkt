@@ -5,16 +5,14 @@
          "./scene1.rkt" 
          "./scene2.rkt")
 
-(anim 
+(anim #:render? #t
+  ;Earth is home to 7.5 billion 3-pound computers.
   (scene1)
+  ;Software connects 3.2 billion of them.
+  ;Software runs companies, factories, research labs, governments, and our daily lives.
+  ;Software is the connective tissue of the human ra--
   (pause-until 400 (scene2))
   (bg))
-
-
-;Earth is home to 7.5 billion 3-pound computers.
-;Software connects 3.2 billion of them.
-;Software runs companies, factories, research labs, governments, and our daily lives.
-;Software is the connective tissue of the human ra--
 
 ;[MUSIC STOP]
 

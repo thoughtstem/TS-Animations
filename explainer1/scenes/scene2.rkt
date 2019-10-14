@@ -1,6 +1,6 @@
 #lang racket
 
-(provide scene2)
+(provide scene2 brain-computer-pair)
 
 (require meta-engine 2htdp/image "../assets.rkt")
 

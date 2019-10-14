@@ -1,6 +1,6 @@
 #lang racket
 
-(provide scene1)
+(provide scene1 brains-on-earth)
 
 (require meta-engine 2htdp/image "../assets.rkt")
 
@@ -54,31 +54,40 @@
                       (brain-circle 1)))) 
     (range n)))
 
+
+(define (brains-on-earth . cs)
+  (add-or-replace-components
+    (parent
+      (children
+        (pop-in-brains 8 5 100)
+
+        (parent
+          (relative-size 1.1)
+          (children
+            (pop-in-brains 7 5 125)))
+
+        (parent
+          (relative-size 1.2)
+          (children
+            (pop-in-brains 5 5 150)))
+
+        (parent
+          (relative-size 1.3)
+          (children
+            (pop-in-brains 3 5 175)))
+
+        (earth
+          (relative-size 1)
+          (relative-rotation 0
+                             (+ (get-rotation) 0.01))
+          (relative-position (posn 0 0)))))
+    cs
+    ))
+
 (define (scene1)
   (enter-north-east
     #:exit 300
-    (pop-in-brains 8 5 100)
-
-    (parent
-      (relative-size 1.1)
-      (children
-        (pop-in-brains 7 5 125)))
-
-    (parent
-      (relative-size 1.2)
-      (children
-        (pop-in-brains 5 5 150)))
-
-    (parent
-      (relative-size 1.3)
-      (children
-        (pop-in-brains 3 5 175)))
-
-    (earth
-      (relative-size 1)
-      (relative-rotation 0
-                         (+ (get-rotation) 0.01))
-      (relative-position (posn 0 0)))))
+    (brains-on-earth)))
 
 (module+ test
   (anim

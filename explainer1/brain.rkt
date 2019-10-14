@@ -63,7 +63,7 @@
  (computer-body-sprite
   (make-object color% 138 43 226 0.5)))
 
-(define (brain-eye-sprite (angle 90)) 
+(define (brain-eye-sprite (angle -90)) 
   (register-sprite
     (scale 0.5
            (add-curve (circle 1 'solid 'transparent)
